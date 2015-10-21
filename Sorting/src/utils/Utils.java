@@ -36,8 +36,8 @@ public class Utils {
 
 	public static List<Integer> generateRandomList(int length) {
 		List<Integer> unsortedList = new ArrayList<Integer>();
-		for (int i = 0; i < 1000; ++i) {
-			int val = randInt(0, 1000);
+		for (int i = 0; i < length; ++i) {
+			int val = randInt(0, length);
 			unsortedList.add(val);
 		}
 		return unsortedList;
