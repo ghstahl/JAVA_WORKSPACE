@@ -19,9 +19,9 @@ public class MergeSortTest {
 		// use already built sorter to test against.
 		Collections.sort(sortedList);
 
-		int cost = MergeSort.sort(unsortedList);
-		System.out.println("Cost:" + cost);
-		assertEquals(sortedList, unsortedList);
+		MergeTuple<List<Integer>, Integer> finalList = MergeSort.sort(unsortedList);
+		System.out.println("Cost:" + finalList.y);
+		assertEquals(sortedList, finalList.x);
 	}
 
 }
