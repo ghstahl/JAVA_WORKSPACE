@@ -21,8 +21,8 @@ public class InsertionSortTest {
 		Collections.sort(sortedList);
 
 		int cost = InsertionSort.sort(unsortedList);
-		assertEquals(sortedList, unsortedList);
 		System.out.println("Cost:" + cost);
+		assertEquals(sortedList, unsortedList);
 
 	}
 
