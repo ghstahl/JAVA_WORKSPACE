@@ -34,6 +34,14 @@ public class Utils {
 		return randomNum;
 	}
 
+	public static List<Integer> makeList(Integer... arguments) {
+		List<Integer> theList = new ArrayList<Integer>();
+		for (Integer n : arguments) {
+			theList.add(n);
+		}
+		return theList;
+	}
+
 	public static List<Integer> generateRandomList(int length) {
 		List<Integer> unsortedList = new ArrayList<Integer>();
 		for (int i = 0; i < length; ++i) {
