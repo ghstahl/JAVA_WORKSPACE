@@ -14,13 +14,18 @@ public class HeapNodeTest {
 	public void test() {
 
 		List<Integer> sourceList = Utils.makeList(10, 5, 12, 3, 7, 45, 33, 11, 2);
-		HeapNode heapNode = new HeapNode(false);
+		HeapNode minHeapNode = new HeapNode(false);
+		HeapNode maxHeapNode = new HeapNode(true);
 		for (Integer n : sourceList) {
-			heapNode.Insert(n);
+			minHeapNode.Insert(n);
+			maxHeapNode.Insert(n);
 		}
 
-		List<Integer> testList = Utils.makeList(-1, 2, 3, 12, 5, 7, 45, 33, 11, 10);
-		assertEquals(heapNode.HeapArray, testList);
+		List<Integer> testMinList = Utils.makeList(-1, 2, 3, 12, 5, 7, 45, 33, 11, 10);
+		assertEquals(minHeapNode.HeapArray, testMinList);
+
+		List<Integer> testMaxList = Utils.makeList(-1, 45, 11, 33, 7, 5, 10, 12, 3, 2);
+		assertEquals(maxHeapNode.HeapArray, testMaxList);
 
 	}
 
