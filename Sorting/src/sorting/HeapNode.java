@@ -30,17 +30,34 @@ public class HeapNode {
 		return a < b;
 	}
 
+	public List<Integer> Sort() {
+		List<Integer> sortedList = new ArrayList<Integer>();
+
+		int lastIndex = HeapArray.size() - 1;
+		while (lastIndex > 0) {
+			Integer last = HeapArray.get(lastIndex);
+			Integer top = HeapArray.get(1);
+			sortedList.add(top);
+			HeapArray.set(1, last);
+			HeapArray.remove(lastIndex);
+			WrapInt wrapIndex = new WrapInt();
+			wrapIndex.value = 1;
+			BubbleDown(wrapIndex);
+			--lastIndex;
+		}
+		return sortedList;
+	}
+
 	private void BubbleDown(WrapInt wrapIndex) {
 		int index = wrapIndex.value;
 		Integer leftIndex = index * 2;
 		Integer rightIndex = leftIndex + 1;
 
-		--leftIndex;
-		--rightIndex;
 		if (leftIndex >= HeapArray.size()) {
 			// out of bounds
 			return;
 		}
+
 		Integer current = HeapArray.get(index);
 		Integer left = HeapArray.get(leftIndex);
 		if (rightIndex >= HeapArray.size()) {
@@ -50,13 +67,16 @@ public class HeapNode {
 				HeapArray.set(index, left);
 				HeapArray.set(leftIndex, current);
 				index = leftIndex;
+				wrapIndex.value = index;
 			}
+			// done, if here we are at the last entry in the array
 
 		} else {
 
+			// we have a right and left leaf
 			Integer right = HeapArray.get(rightIndex);
 
-			if (left > right) {
+			if (Compare(left, right)) {
 				if (Compare(left, current)) {
 					// swapit.
 					HeapArray.set(index, left);
