@@ -10,7 +10,7 @@ public class Question4Test {
 	public void testReplace() {
 		String original = "Mr John Smith    ";
 		String outputExpected = "Mr%20John%20Smith";
-		String actualOutput = Question4.replace(original, " ", "%20");
+		String actualOutput = Question4.replace(original, "%20");
 		assertEquals(outputExpected, actualOutput);
 	}
 
