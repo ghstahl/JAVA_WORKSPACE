@@ -15,5 +15,6 @@ public class Question3Test {
 	@Test
 	public void testIsPermutation_Yes() {
 		assertTrue(Question3.isPermutation("abc", "cba"));
+		assertTrue(Question3.isPermutation("abcabcabcabc", "cbacbacbacba"));
 	}
 }
