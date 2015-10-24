@@ -9,7 +9,7 @@ public class Question5Test {
 	@Test
 	public void testCompress_YES() {
 		String original = "aabcccccaaa";
-		String expectedResult = "a2blc5a3";
+		String expectedResult = "a2b1c5a3";
 
 		String actualResult = Question5.compress(original);
 		assertEquals(expectedResult, actualResult);
