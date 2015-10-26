@@ -7,6 +7,10 @@ public class Question6 {
 	 * you do this in place?
 	 */
 
+	/*
+	 * Assume N is the length of a single side. Running time is N + N-2 +N-4...1
+	 * O(N) Size is N^2 // construction of the grid.
+	 */
 	// Running time O(N), everything else (Memory, etc) is constant.
 	public static void Rotate90(ImageContainer imageContainer) {
 
