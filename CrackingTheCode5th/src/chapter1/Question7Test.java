@@ -7,7 +7,7 @@ import org.junit.Test;
 public class Question7Test {
 
 	@Test
-	public void testZeroOutColumsAndRows() {
+	public void testZeroOutColumsAndRows_Quadratic() {
 
 		ImageContainer image = new ImageContainer(4);
 		image.matrix[0] = new int[] { 0, 2, 3, 4 };
@@ -21,7 +21,7 @@ public class Question7Test {
 		expectedImage.matrix[2] = new int[] { 0, 4, 5, 0 };
 		expectedImage.matrix[3] = new int[] { 0, 0, 0, 0 };
 
-		Question7.ZeroOutColumsAndRows(image);
+		Question7.ZeroOutColumsAndRows_Quadratic(image);
 		for (int i = 0; i < 4; ++i) {
 			int[] one = image.matrix[i];
 			int[] two = expectedImage.matrix[i];
