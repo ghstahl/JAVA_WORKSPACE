@@ -10,7 +10,9 @@ package chapter2;
 public class Question2 {
 
 	public static LinkedNode FetchNthFromEndNode(LinkedNode head, int nth) {
-		return null;
+		LinkedNode nLast = head.last();
+		LinkedNode ntheNode = nLast.retreat(nth - 1);
+		return ntheNode;
 	}
 
 }
