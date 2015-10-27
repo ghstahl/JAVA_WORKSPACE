@@ -12,7 +12,7 @@ package chapter2;
 public class Question3 {
 
 	public static void phanthomDelete(LinkedNode head) {
-
+		head.phanthomDelete();
 	}
 
 }

@@ -35,7 +35,7 @@ public class Question3Test {
 		Question3.phanthomDelete(node2);
 
 		assertEquals(node1, node0.Next);
-		assertEquals(node3, node1.Next);
+		assertEquals(node3.get(), node1.Next.get());
 		assertEquals(node4, node3.Next);
 
 	}

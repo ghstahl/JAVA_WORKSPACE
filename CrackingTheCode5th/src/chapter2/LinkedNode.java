@@ -51,6 +51,18 @@ public class LinkedNode<T> {
 		return current;
 	}
 
+	public void phanthomDelete() {
+		// a back pointer is not allowed.
+		// so if I have to delete me, then in reality I have to become the node
+		// next to me and delete that node.
+
+		this.set(Next.get());
+		this.Next = this.Next.Next;
+		this.Next.Prev = this;// not allowed for this, but I can't not fix this
+								// back pointer
+
+	}
+
 	// 1 time run
 	public void append(LinkedNode<T> node) {
 
