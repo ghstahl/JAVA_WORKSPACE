@@ -17,7 +17,40 @@ package chapter2;
 public class Question5 {
 
 	public static LinkedNode sum(LinkedNode node1, LinkedNode node2) {
-		return null;
+
+		LinkedNode<Integer> actualCurrent = null;
+		LinkedNode<Integer> head = null;
+		LinkedNode n1Current = node1;
+		LinkedNode n2Current = node2;
+
+		int carryOver = 0;
+		while (n1Current != null || n2Current != null || carryOver > 0) {
+
+			int n1 = n1Current == null ? 0 : (int) n1Current.get();
+			int n2 = n2Current == null ? 0 : (int) n2Current.get();
+
+			int nR = n1 + n2 + carryOver;
+			int digit = 0;
+			if (nR / 10 == 1) {
+				carryOver = 1;
+				digit = nR - 10;
+			} else {
+				carryOver = 0;
+				digit = nR;
+			}
+			LinkedNode currentDigit = new LinkedNode<Integer>(digit);
+			if (actualCurrent != null) {
+				actualCurrent.append(currentDigit);
+			} else {
+				head = currentDigit;
+			}
+			actualCurrent = currentDigit;
+
+			n1Current = n1Current == null ? null : n1Current.Next;
+			n2Current = n2Current == null ? null : n2Current.Next;
+
+		}
+		return head;
 
 	}
 
