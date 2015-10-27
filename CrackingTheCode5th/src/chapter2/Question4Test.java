@@ -1,7 +1,7 @@
 package chapter2;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
 
 import org.junit.Test;
 
@@ -33,7 +33,9 @@ public class Question4Test {
 			assertTrue((Integer) nodeG.get() >= (Integer) nodeG.get());
 			nodeG = nodeG.Next;
 		}
-		fail("Not yet implemented");
+		int nCount = nodeH.head().count();
+		assertEquals(101, nCount);
+
 	}
 
 }

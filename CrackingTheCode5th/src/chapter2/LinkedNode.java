@@ -17,6 +17,34 @@ public class LinkedNode<T> {
 		return t;
 	}
 
+	public LinkedNode<T> head() {
+		LinkedNode<T> current = this;
+		while (true) {
+			if (current.Prev == null)
+				return current;
+			current = current.Prev;
+		}
+	}
+
+	public LinkedNode<T> tail() {
+		LinkedNode<T> current = this;
+		while (true) {
+			if (current.Next == null)
+				return current;
+			current = current.Next;
+		}
+	}
+
+	public int count() {
+		int nCount = 0;
+		LinkedNode<T> current = this;
+		while (current != null) {
+			++nCount;
+			current = current.Next;
+		}
+		return nCount;
+	}
+
 	// O(N) time run
 	public LinkedNode<T> last() {
 		LinkedNode<T> current = this;
@@ -88,7 +116,7 @@ public class LinkedNode<T> {
 	}
 
 	// 1 time run
-	public void delete() {
+	public LinkedNode<T> delete() {
 
 		if (Next != null) {
 			this.Next.Prev = this.Prev;
@@ -96,6 +124,9 @@ public class LinkedNode<T> {
 		if (Prev != null) {
 			this.Prev.Next = this.Next;
 		}
+		this.Next = null;
+		this.Prev = null;
+		return this;
 	}
 
 	public LinkedNode<T> Next;
