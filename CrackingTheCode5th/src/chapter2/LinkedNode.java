@@ -17,6 +17,57 @@ public class LinkedNode<T> {
 		return t;
 	}
 
+	public LinkedNode<T> clone() {
+		LinkedNode aClone = new LinkedNode<T>(get());// not really a clone if
+														// get
+														// is an object
+		aClone.Next = Next;
+		aClone.Prev = Prev;
+		return aClone;
+	}
+
+	public static void swap(LinkedNode a, LinkedNode b) {
+		LinkedNode bTemp = b.clone();
+
+		b.Next = a.Next;
+		b.Prev = a.Prev;
+
+		if (b.Prev != null) {
+			b.Prev.Next = b;
+		}
+		if (b.Next != null) {
+			b.Next.Prev = b;
+		}
+
+		a.Next = bTemp.Next;
+		a.Prev = bTemp.Prev;
+
+		if (a.Prev != null) {
+			a.Prev.Next = a;
+		}
+		if (a.Next != null) {
+			a.Next.Prev = a;
+		}
+
+	}
+
+	public LinkedNode<T> extract() {
+		LinkedNode<T> prev = Prev;
+		LinkedNode<T> next = Next;
+
+		if (prev != null) {
+			prev.Next = next;
+		}
+
+		if (next != null) {
+			next.Prev = prev;
+		}
+
+		Next = null;
+		Prev = null;
+		return this;
+	}
+
 	public LinkedNode<T> head() {
 		LinkedNode<T> current = this;
 		while (true) {

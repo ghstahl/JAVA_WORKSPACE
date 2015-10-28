@@ -9,6 +9,44 @@ package chapter2;
  */
 public class Question4 {
 
+	public static void partitionAround_ReachOutSelection(LinkedNode node) {
+		LinkedNode nextNodeOffset = null;// for efficiency
+
+		LinkedNode current = node.Prev;
+		while (current != null) {
+			if ((Integer) current.get() >= (Integer) node.get()) {
+				// we extract and then append to node.
+				LinkedNode next = current.Next;
+				current.extract();
+				node.append(current);
+
+				if (nextNodeOffset == null) {
+					// only do once, as the the first current just gets pushed
+					// ahead.
+					nextNodeOffset = current;
+				}
+				current = next;
+			}
+			current = current.Prev;
+		}
+
+		if (nextNodeOffset == null) {
+			nextNodeOffset = node;
+		}
+		current = nextNodeOffset.Next;
+		while (current != null) {
+			if ((Integer) current.get() < (Integer) node.get()) {
+				// we extract and then append to node.
+				LinkedNode prev = current.Prev;
+				current.extract();
+				node.prepend(current);
+				current = prev;
+			}
+			current = current.Next;
+		}
+
+	}
+
 	public static void partitionAround(LinkedNode node) {
 		LinkedNode clone = new LinkedNode<Integer>(0);// this is just a temp.
 		LinkedNode lastOnTheLeft = node.Prev;
