@@ -18,7 +18,7 @@ public class Question3_TowerOfHanoiTest {
 			one.push(i);
 			three.push(i);
 		}
-
+		Question3_TowerOfHanoi.solve(5, container);
 		for (int i = 0; i < 3; ++i) {
 			assertEquals(container.stackList.get(i), containerExpected.stackList.get(i));
 		}
