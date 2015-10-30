@@ -36,7 +36,7 @@ public class Question3_TowerOfHanoi {
 	}
 
 	private void move(int disks, Stack A, Stack B, Stack C) {
-		if (disks > 1) {
+		if (disks > 0) {
 			// this is our thick one we move to B
 			move(disks - 1, A, C, B);
 
