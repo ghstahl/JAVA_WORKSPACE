@@ -10,62 +10,40 @@ import org.junit.Test;
 public class FindAllPathsThroughGridTest {
 
 	@Test
-	public void test() {
+	public void testDownAndRight() {
 
 		int board[][] = new int[8][8];
 
 		List<List<Cordinates>> expected = new ArrayList<List<Cordinates>>();
-		List<Cordinates> path1 = new ArrayList<Cordinates>();
-		path1.add(new Cordinates(0, 0));
-		path1.add(new Cordinates(1, 0));
+		List<Cordinates> path = new ArrayList<Cordinates>();
+		path.add(new Cordinates(1, 0));
+		path.add(new Cordinates(1, 1));
+		path.add(new Cordinates(2, 1));
+		path.add(new Cordinates(2, 2));
+		path.add(new Cordinates(3, 2));
+		path.add(new Cordinates(3, 3));
+		path.add(new Cordinates(4, 3));
+		path.add(new Cordinates(5, 3));
+		path.add(new Cordinates(6, 3));
+		path.add(new Cordinates(7, 3));
+		path.add(new Cordinates(7, 4));
+		path.add(new Cordinates(7, 5));
+		path.add(new Cordinates(7, 6));
+		path.add(new Cordinates(7, 7));
+		expected.add(path);
 
-		path1.add(new Cordinates(1, 1));
-		path1.add(new Cordinates(2, 1));
-
-		path1.add(new Cordinates(2, 2));
-		path1.add(new Cordinates(3, 2));
-
-		path1.add(new Cordinates(3, 3));
-		path1.add(new Cordinates(4, 3));
-
-		path1.add(new Cordinates(4, 4));
-		path1.add(new Cordinates(5, 4));
-
-		path1.add(new Cordinates(5, 5));
-		path1.add(new Cordinates(6, 5));
-
-		path1.add(new Cordinates(6, 6));
-		path1.add(new Cordinates(7, 6));
-
-		path1.add(new Cordinates(7, 7));
-		path1.add(new Cordinates(7, 7));
-		expected.add(path1);
-
-		List<Cordinates> path2 = new ArrayList<Cordinates>();
-		path2.add(new Cordinates(0, 0));
-		path2.add(new Cordinates(1, 0));
-
-		path2.add(new Cordinates(1, 1));
-		path2.add(new Cordinates(2, 1));
-
-		path2.add(new Cordinates(2, 2));
-		path2.add(new Cordinates(3, 2));
-
-		path2.add(new Cordinates(3, 3));
-		path2.add(new Cordinates(4, 3));
-
-		path2.add(new Cordinates(4, 4));
-		path2.add(new Cordinates(3, 4));
-
-		path2.add(new Cordinates(3, 5));
-		path2.add(new Cordinates(2, 5));
-
-		path2.add(new Cordinates(2, 6));
-		path2.add(new Cordinates(1, 6));
-
-		path2.add(new Cordinates(1, 7));
-		path2.add(new Cordinates(0, 7));
-		expected.add(path2);
+		path = new ArrayList<Cordinates>();
+		path.add(new Cordinates(1, 0));
+		path.add(new Cordinates(1, 1));
+		path.add(new Cordinates(2, 1));
+		path.add(new Cordinates(2, 2));
+		path.add(new Cordinates(3, 2));
+		path.add(new Cordinates(3, 3));
+		path.add(new Cordinates(3, 4));
+		path.add(new Cordinates(3, 5));
+		path.add(new Cordinates(3, 6));
+		path.add(new Cordinates(3, 7));
+		expected.add(path);
 
 		for (int i = 0; i < expected.size(); ++i) {
 			for (Cordinates cord : expected.get(i)) {
@@ -73,7 +51,7 @@ public class FindAllPathsThroughGridTest {
 			}
 		}
 
-		List<List<Cordinates>> actual = FindAllPathsThroughGrid.findPathsFromTopToBottom(board);
+		List<List<Cordinates>> actual = FindAllPathsThroughGrid.findPathsFromTopToBottomDownAndRightOnly(board);
 		assertEquals(actual.size(), expected.size());
 		for (int i = 0; i < expected.size(); ++i) {
 			assertEquals(expected.get(i), actual.get(i));
