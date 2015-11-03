@@ -45,6 +45,22 @@ public class FindAllPathsThroughGridTest {
 		path.add(new Cordinates(3, 7));
 		expected.add(path);
 
+		path = new ArrayList<Cordinates>();
+		path.add(new Cordinates(1, 0));
+		path.add(new Cordinates(1, 1));
+		path.add(new Cordinates(2, 1));
+		path.add(new Cordinates(2, 2));
+		path.add(new Cordinates(3, 2));
+		path.add(new Cordinates(3, 3));
+		path.add(new Cordinates(3, 4));
+		path.add(new Cordinates(2, 4));
+		path.add(new Cordinates(1, 4));
+		path.add(new Cordinates(0, 4));
+		path.add(new Cordinates(0, 5));
+		path.add(new Cordinates(0, 6));
+		path.add(new Cordinates(0, 7));
+		expected.add(path);
+
 		for (int i = 0; i < expected.size(); ++i) {
 			for (Cordinates cord : expected.get(i)) {
 				board[cord.x][cord.y] = 1;
