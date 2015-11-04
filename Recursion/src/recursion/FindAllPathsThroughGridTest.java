@@ -18,14 +18,11 @@ public class FindAllPathsThroughGridTest {
 		int totalOpen = total * percentOpen / 100;
 		Random randomGenerator = new Random();
 		while (totalOpen > 0) {
-			for (int i = 0; i < x; ++i) {
-				for (int j = 0; j < y; ++j) {
-					int randomInt = randomGenerator.nextInt(100);
-					if (randomInt % 2 == 1) {
-						board[i][j] = 1;
-						--totalOpen;
-					}
-				}
+			int randomIntX = randomGenerator.nextInt(20);
+			int randomIntY = randomGenerator.nextInt(20);
+			if (board[randomIntX][randomIntY] == 0) {
+				board[randomIntX][randomIntY] = 1;
+				--totalOpen;
 			}
 		}
 		return board;
@@ -37,14 +34,17 @@ public class FindAllPathsThroughGridTest {
 
 		int nTotal = 1000;
 		int nPerc = 0;
+
 		for (int i = 0; i < nTotal; ++i) {
-			int board[][] = BuildRandomGrid(20, 20, 40);
+			int board[][] = BuildRandomGrid(20, 20, 60);
 			assertNotNull(board);
 			List<List<Cordinates>> actual = FindAllPathsThroughGrid.findPathsToBottom(false, board);
-			nPerc += actual.size();
-
+			if (actual.size() > 0) {
+				++nPerc;
+			}
 		}
 		int percentPerc = (nPerc * 100) / nTotal;
+
 		System.out.println("PercentPerc:" + percentPerc);
 		// assertEquals(actual.size(), 1);
 	}
