@@ -1,13 +1,53 @@
 package recursion;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import org.junit.Test;
 
 public class FindAllPathsThroughGridTest {
+
+	public static int[][] BuildRandomGrid(int x, int y, int percentOpen) {
+		int board[][] = new int[x][y];
+
+		int total = x * y;
+		int totalOpen = total * percentOpen / 100;
+		Random randomGenerator = new Random();
+		while (totalOpen > 0) {
+			for (int i = 0; i < x; ++i) {
+				for (int j = 0; j < y; ++j) {
+					int randomInt = randomGenerator.nextInt(100);
+					if (randomInt % 2 == 1) {
+						board[i][j] = 1;
+						--totalOpen;
+					}
+				}
+			}
+		}
+		return board;
+
+	}
+
+	@Test
+	public void testPercolation() {
+
+		int nTotal = 1000;
+		int nPerc = 0;
+		for (int i = 0; i < nTotal; ++i) {
+			int board[][] = BuildRandomGrid(20, 20, 40);
+			assertNotNull(board);
+			List<List<Cordinates>> actual = FindAllPathsThroughGrid.findPathsToBottom(false, board);
+			nPerc += actual.size();
+
+		}
+		int percentPerc = (nPerc * 100) / nTotal;
+		System.out.println("PercentPerc:" + percentPerc);
+		// assertEquals(actual.size(), 1);
+	}
 
 	@Test
 	public void testDownAndRight() {
