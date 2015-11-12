@@ -15,6 +15,10 @@ public class ArrayBackedStack<T> {
 		this.baseIndex = baseIndex;
 		this.upperIndex = upperIndex;
 		this.currentIndex = baseIndex - 1;
+		if (upperIndex >= backingArray.length) {
+			throw new ArrayIndexOutOfBoundsException("upper bound exception");
+		}
+
 	}
 
 	public void push(T item) {
