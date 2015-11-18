@@ -76,4 +76,18 @@ public class BinaryNodeTest {
 		boolean balanced = rootNode.isBalanced_waterLevelMethod();
 		assertTrue(balanced);
 	}
+
+	@Test
+	public void test_Make_Balanced_Tree_from_Sorted_Integer_Array() {
+		Integer[] sortedArray = new Integer[100];
+		for (int i = 0; i < sortedArray.length; ++i) {
+			sortedArray[i] = i;
+		}
+
+		BinaryNode<Integer> rootNode = BinaryNode.MakeBalancedTree(sortedArray);
+		// not balanced
+		boolean balanced = rootNode.isBalanced_waterLevelMethod();
+		assertTrue(balanced);
+	}
+
 }

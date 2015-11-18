@@ -63,15 +63,19 @@ public class GraphNode<T> {
 		this.data = data;
 	}
 
-	public static boolean isPath(GraphNode start, GraphNode destination) {
+	public static boolean isPathRecursiveDFS(GraphNode start, GraphNode destination) {
 		GraphNode.setVisitedMarker(1234);
 		boolean result = DFS_recursiveFind(start, destination);
 		return result;
 	}
 
-	public static boolean isPathIterative(GraphNode start, GraphNode destination) {
-
+	public static boolean isPathIterativeDFS(GraphNode start, GraphNode destination) {
 		boolean result = DFS_iterativeFind(start, destination);
+		return result;
+	}
+
+	public static boolean isPathIterativeBFS(GraphNode start, GraphNode destination) {
+		boolean result = BFS_iterativeFind(start, destination);
 		return result;
 	}
 
@@ -109,8 +113,42 @@ public class GraphNode<T> {
 				}
 				for (int i = 0; i < current.getToEdges().size(); ++i) {
 					GraphEdge ge = (GraphEdge) current.getToEdges().get(i);
-					st.push(ge.getToNode());
+					if (!ge.getToNode().isVisited()) {
+						st.push(ge.getToNode());
+					}
 				}
+			}
+		}
+		return found;
+	}
+
+	private static boolean BFS_iterativeFind(GraphNode start, GraphNode destination) {
+		GraphNode.setVisitedMarker(3456);
+		Stack sta = new Stack();
+		Stack stb = new Stack();
+
+		sta.push(start);
+		boolean found = false;
+		while (!sta.isEmpty()) {
+			GraphNode current = (GraphNode) sta.pop();
+			if (!current.isVisited()) {
+				current.setVisited();
+				if (current == destination) {
+					found = true;
+					break;
+				}
+				for (int i = 0; i < current.getToEdges().size(); ++i) {
+					GraphEdge ge = (GraphEdge) current.getToEdges().get(i);
+					if (!ge.getToNode().isVisited()) {
+						stb.push(ge.getToNode());
+					}
+				}
+
+			}
+			if (sta.isEmpty()) {
+				Stack stTemp = sta;
+				sta = stb;
+				stb = stTemp;
 			}
 		}
 		return found;

@@ -63,4 +63,54 @@ public class BinaryNode<T> {
 
 		return balanced;
 	}
+
+	// divide and conquer recursive sorted array into balanced binary search
+	// tree.
+	// would look nicer if I had slices in java.
+	public static void recursiveInsertIntoBST(BinaryNode<Integer> root, Integer[] sortedArray, int startIndex,
+			int endIndex) {
+		if (startIndex == endIndex) {
+			if (root.data == null) {
+				root.data = sortedArray[startIndex];
+			} else {
+				// we are done;
+				if (sortedArray[startIndex] > root.data) {
+					root.right = new BinaryNode<Integer>(sortedArray[startIndex]);
+				} else {
+					root.left = new BinaryNode<Integer>(sortedArray[startIndex]);
+				}
+			}
+		} else {
+
+			int range = endIndex - startIndex + 1;
+			int middle = startIndex + range / 2;
+			BinaryNode<Integer> node = new BinaryNode<Integer>(sortedArray[middle]);
+			if (root.data == null) {
+				root.data = node.data;
+				node = root;
+			} else {
+				if (sortedArray[middle] > root.data) {
+					root.right = node;
+				} else {
+					root.left = node;
+				}
+			}
+			int rightStart = middle + 1;
+			if (rightStart <= endIndex) {
+				recursiveInsertIntoBST(node, sortedArray, rightStart, endIndex);
+			}
+
+			int leftEnd = middle - 1;
+			recursiveInsertIntoBST(node, sortedArray, startIndex, leftEnd);
+		}
+	}
+
+	public static BinaryNode<Integer> MakeBalancedTree(Integer[] sortedArray) {
+
+		BinaryNode<Integer> rootNode = new BinaryNode<Integer>();
+		recursiveInsertIntoBST(rootNode, sortedArray, 0, sortedArray.length - 1);
+		// TODO Auto-generated method stub
+		return rootNode;
+	}
+
 }

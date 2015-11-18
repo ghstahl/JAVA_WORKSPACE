@@ -46,8 +46,9 @@ public class GraphNodeTest {
 
 		rootNode8.addEdge(rootNode9);
 
-		assertTrue(GraphNode.isPath(rootNode0, rootNode9));
-		assertTrue(GraphNode.isPathIterative(rootNode0, rootNode9));
+		assertTrue(GraphNode.isPathRecursiveDFS(rootNode0, rootNode9));
+		assertTrue(GraphNode.isPathIterativeDFS(rootNode0, rootNode9));
+		assertTrue(GraphNode.isPathIterativeBFS(rootNode0, rootNode9));
 	}
 
 }
