@@ -2,6 +2,7 @@ package chapter4TreesAndGraphs;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 
 public class BinaryNode<T> {
 	public BinaryNode<T> right;
@@ -16,9 +17,45 @@ public class BinaryNode<T> {
 		this.data = data;
 	}
 
+	// 4.5 Implement a function to check if a binary tree is a binary search
+	// tree.
+	// BFS to see if a binary tree is a BST.
+	// using 2 stacks.
+	public <T extends Comparable<T>> boolean isBinarySearchTree() {
+		Stack bstStackA = new Stack();
+		Stack bstStackB = new Stack();
+		bstStackA.push(this);
+		while (!bstStackA.isEmpty()) {
+			BinaryNode<T> node = (BinaryNode<T>) bstStackA.pop();
+			if (node.left != null) {
+				if (node.left.data.compareTo(node.data) > 0) {
+					return false;
+				}
+				bstStackB.push(node.left);
+			}
+			if (node.right != null) {
+				if (node.right.data.compareTo(node.data) < 0) {
+					return false;
+				}
+				bstStackB.push(node.right);
+			}
+			if (bstStackA.isEmpty()) {
+				bstStackA = bstStackB;
+				bstStackB = new Stack();
+			}
+		}
+		return true;
+	}
+
+	// 4.1 Implement a function to check if a binary tree is balanced. For the
+	// purposes of this question, a balanced tree is defined to be a tree such
+	// that the heights of the two subtrees of any node never differ by more
+	// than one.
 	// imagine the tree is submerged and we pull it out of the water. We
 	// remember the first one out and if any branch remains in the water after 2
 	// iterations than it is not balanced.
+	// Breadth Traversal where the breadth grows and if it shrinks we go one
+	// more level down to see if it dead ends.
 	public boolean isBalanced_waterLevelMethod() {
 		int shortestDepth = -1;
 		int currentDepth = 0;
@@ -105,7 +142,9 @@ public class BinaryNode<T> {
 		}
 	}
 
-	public static BinaryNode<Integer> MakeBalancedTree(Integer[] sortedArray) {
+	// 4.3 Given a sorted (increasing order) array with unique integer elements,
+	// write an algorithm to create a binary search tree with minimal height.
+	public static BinaryNode<Integer> MakeBalancedBST(Integer[] sortedArray) {
 
 		BinaryNode<Integer> rootNode = new BinaryNode<Integer>();
 		recursiveInsertIntoBST(rootNode, sortedArray, 0, sortedArray.length - 1);

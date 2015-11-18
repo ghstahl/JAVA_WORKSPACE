@@ -63,17 +63,23 @@ public class GraphNode<T> {
 		this.data = data;
 	}
 
+	// 4.2 Given a directed graph, design an algorithm to find out whether there
+	// is a route between two nodes.
 	public static boolean isPathRecursiveDFS(GraphNode start, GraphNode destination) {
 		GraphNode.setVisitedMarker(1234);
 		boolean result = DFS_recursiveFind(start, destination);
 		return result;
 	}
 
+	// 4.2 Given a directed graph, design an algorithm to find out whether there
+	// is a route between two nodes.
 	public static boolean isPathIterativeDFS(GraphNode start, GraphNode destination) {
 		boolean result = DFS_iterativeFind(start, destination);
 		return result;
 	}
 
+	// 4.2 Given a directed graph, design an algorithm to find out whether there
+	// is a route between two nodes.
 	public static boolean isPathIterativeBFS(GraphNode start, GraphNode destination) {
 		boolean result = BFS_iterativeFind(start, destination);
 		return result;
