@@ -142,4 +142,74 @@ public class BinaryNodeTest {
 			assertEquals(depthList.get(i).size(), runningCount);
 		}
 	}
+
+	// 4.6 Write an algorithm to find the'next'node (i.e., in-order successor)
+	// of a given node in a binary search tree. You may assume that each node
+	// has a link to its parent.
+	@Test
+	public void test_Make_Balanced_Tree_and_Find_Next_In_Order_Successor_1() {
+
+		class EventSubscriber implements ISubscriber<BinaryNode<Integer>> {
+			public BinaryNode<Integer> node;
+
+			@Override
+			public void onEvent(BinaryNode<Integer> object) {
+				// TODO Auto-generated method stub
+				node = object;
+				node.StopTraversal();
+			}
+		}
+
+		int depth = 5;
+		EventSubscriber es = new EventSubscriber();
+		BinaryNode<Integer> rootNode = makeLargeBalancedTree(depth, false);
+		rootNode.RegisterSubscriber(es);
+		rootNode.DoInOrderRootUpDownTraversal();
+		assertTrue(es.node.data == 15);
+	}
+
+	// 4.6 Write an algorithm to find the'next'node (i.e., in-order successor)
+	// of a given node in a binary search tree. You may assume that each node
+	// has a link to its parent.
+	@Test
+	public void test_Make_Balanced_Tree_and_Find_Next_In_Order_Successor_2() {
+
+		class EventSubscriber implements ISubscriber<BinaryNode<Integer>> {
+			public BinaryNode<Integer> node;
+
+			@Override
+			public void onEvent(BinaryNode<Integer> object) {
+				// TODO Auto-generated method stub
+				node = object;
+				node.StopTraversal();
+			}
+		}
+
+		class EventSubscriber2 implements ISubscriber<BinaryNode<Integer>> {
+			int nCount;
+			public BinaryNode<Integer> node;
+
+			@Override
+			public void onEvent(BinaryNode<Integer> object) {
+				// TODO Auto-generated method stub
+				node = object;
+				++nCount;
+				if (nCount == 2) {
+					node.StopTraversal();
+				}
+			}
+		}
+
+		int depth = 5;
+		EventSubscriber es = new EventSubscriber();
+		BinaryNode<Integer> rootNode = makeLargeBalancedTree(depth, false);
+		rootNode.RegisterSubscriber(es);
+		rootNode.DoInOrderRootUpDownTraversal();
+		assertTrue(es.node.data == 15);
+
+		EventSubscriber2 es2 = new EventSubscriber2();
+		es.node.RegisterSubscriber(es2);
+		es.node.DoInOrderRootUpDownTraversal();
+		assertTrue(es2.node.data == 7);
+	}
 }

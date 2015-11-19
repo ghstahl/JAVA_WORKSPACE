@@ -6,11 +6,27 @@ import java.util.List;
 import java.util.Queue;
 import java.util.Stack;
 
-public class BinaryNode<T> {
+import utils.Utils;
+
+public class BinaryNode<T> extends EventRegistration<BinaryNode<T>> {
 	private BinaryNode<T> parent;
 	private BinaryNode<T> right;
 	private BinaryNode<T> left;
 	public T data;
+	private int visited;
+	private static int visitedMarker;
+
+	public static void setVisitedMarker(int visitedMarker) {
+		BinaryNode.visitedMarker = visitedMarker;
+	}
+
+	public void setVisited() {
+		this.visited = BinaryNode.visitedMarker;
+	}
+
+	public boolean isVisited() {
+		return this.visited == BinaryNode.visitedMarker;
+	}
 
 	public BinaryNode() {
 
@@ -18,6 +34,58 @@ public class BinaryNode<T> {
 
 	public BinaryNode(T data) {
 		this.data = data;
+	}
+
+	private static boolean isStopTraversal;
+
+	public static void StopTraversal() {
+		isStopTraversal = true;
+	}
+
+	// Left,Root,Right
+	//
+	public void DoInOrderRootDownTraversal() {
+		BinaryNode.setVisitedMarker(Utils.randInt(0, 1000000));
+		isStopTraversal = false;
+		RecursiveInOrderRootDownTraversal(this, this);
+	}
+
+	// Left,Root,Right
+	//
+	public void DoInOrderRootUpDownTraversal() {
+		BinaryNode.setVisitedMarker(Utils.randInt(0, 1000000));
+		isStopTraversal = false;
+		RecursiveInOrderUpDownTraversal(this, this);
+	}
+
+	public void RecursiveInOrderUpDownTraversal(BinaryNode<T> node,
+			IEventRegistration<BinaryNode<T>> eventRegistration) {
+		if (node == null || isStopTraversal) {
+			return;
+		}
+		RecursiveInOrderRootDownTraversal(node, eventRegistration);
+		RecursiveInOrderUpDownTraversal(node.getParent(), eventRegistration);
+
+	}
+
+	// 4.6 Write an algorithm to find the'next'node (i.e., in-order successor)
+	// of a given node in a binary search tree. You may assume that each node
+	// has a link to its parent.
+	public void RecursiveInOrderRootDownTraversal(BinaryNode<T> node,
+			IEventRegistration<BinaryNode<T>> eventRegistration) {
+		if (node == null || isStopTraversal) {
+			return;
+		}
+		if (node.isVisited()) {
+			return;
+		}
+		RecursiveInOrderRootDownTraversal(node.getLeft(), eventRegistration);
+		if (isStopTraversal) {
+			return;
+		}
+		eventRegistration.FireEvent(node);
+		node.setVisited();
+		RecursiveInOrderRootDownTraversal(node.getRight(), eventRegistration);
 	}
 
 	// 4.5 Implement a function to check if a binary tree is a binary search
