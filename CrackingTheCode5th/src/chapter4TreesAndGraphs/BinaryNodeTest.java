@@ -1,5 +1,6 @@
 package chapter4TreesAndGraphs;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
@@ -11,15 +12,22 @@ import org.junit.Test;
 import utils.Utils;
 
 public class BinaryNodeTest {
-	BinaryNode<Integer> makeLargeBalancedTree(int depth) {
-		BinaryNode<Integer> rootNode = new BinaryNode<>(Utils.randInt(0, 1000));
+	Integer nextValue(Integer data, boolean doRandomData) {
+		data = (doRandomData ? Utils.randInt(0, 1000) : ++data);
+		return data;
+	}
+
+	BinaryNode<Integer> makeLargeBalancedTree(int depth, boolean doRandomData) {
+		Integer data = -1;
+
+		BinaryNode<Integer> rootNode = new BinaryNode<>(data = nextValue(data, doRandomData));
 		List<BinaryNode<Integer>> listNode = new ArrayList<BinaryNode<Integer>>();
 		listNode.add(rootNode); // start out;
 		List<BinaryNode<Integer>> listWorkingNode = new ArrayList<BinaryNode<Integer>>();
 		for (int i = 1; i < depth; ++i) {
 			for (int j = 0; j < listNode.size(); ++j) {
-				listNode.get(j).left = new BinaryNode<Integer>(Utils.randInt(0, 1000));
-				listNode.get(j).right = new BinaryNode<Integer>(Utils.randInt(0, 1000));
+				listNode.get(j).left = new BinaryNode<Integer>(data = nextValue(data, doRandomData));
+				listNode.get(j).right = new BinaryNode<Integer>(data = nextValue(data, doRandomData));
 				listWorkingNode.add(listNode.get(j).left);
 				listWorkingNode.add(listNode.get(j).right);
 			}
@@ -73,7 +81,7 @@ public class BinaryNodeTest {
 
 	@Test
 	public void testIsBalanced_YesLarge() {
-		BinaryNode<Integer> rootNode = makeLargeBalancedTree(20);
+		BinaryNode<Integer> rootNode = makeLargeBalancedTree(20, true);
 		// not balanced
 		boolean balanced = rootNode.isBalanced_waterLevelMethod();
 		assertTrue(balanced);
@@ -114,8 +122,24 @@ public class BinaryNodeTest {
 	// tree.
 	@Test
 	public void test_Make_Large_Balanced_Tree_and_verify_that_it_is_NOT_a_BST() {
-		BinaryNode<Integer> rootNode = makeLargeBalancedTree(20);
+		BinaryNode<Integer> rootNode = makeLargeBalancedTree(20, false);
 		boolean isBST = rootNode.isBinarySearchTree();
 		assertFalse(isBST);
+	}
+
+	// 4.4 Given a binary tree, design an algorithm which creates a linked list
+	// of all the nodes at each depth (e.g., if you have a tree with depth D,
+	// you'll have D linked lists).
+	@Test
+	public void test_Make_Balanced_Tree_and_Turn_It_into_depth_list() {
+		int depth = 5;
+		BinaryNode<Integer> rootNode = makeLargeBalancedTree(depth, false);
+		List<List<BinaryNode<Integer>>> depthList = rootNode.MakeDepthList();
+
+		assertEquals(depthList.size(), depth);
+		int runningCount = 1;
+		for (int i = 0; i < depthList.size(); ++i, runningCount *= 2) {
+			assertEquals(depthList.get(i).size(), runningCount);
+		}
 	}
 }

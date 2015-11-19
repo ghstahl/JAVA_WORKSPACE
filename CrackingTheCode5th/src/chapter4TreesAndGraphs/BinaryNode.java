@@ -1,7 +1,9 @@
 package chapter4TreesAndGraphs;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 import java.util.Stack;
 
 public class BinaryNode<T> {
@@ -150,6 +152,38 @@ public class BinaryNode<T> {
 		recursiveInsertIntoBST(rootNode, sortedArray, 0, sortedArray.length - 1);
 		// TODO Auto-generated method stub
 		return rootNode;
+	}
+
+	// 4.4 Given a binary tree, design an algorithm which creates a linked list
+	// of all the nodes at each depth (e.g., if you have a tree with depth D,
+	// you'll have D linked lists).
+	public List<List<BinaryNode<T>>> MakeDepthList() {
+
+		List<List<BinaryNode<T>>> llBN = new ArrayList<List<BinaryNode<T>>>();
+
+		List<BinaryNode<T>> lA = new ArrayList<BinaryNode<T>>();
+		Queue stA = new LinkedList<BinaryNode<T>>();
+		Queue stB = new LinkedList<BinaryNode<T>>();
+
+		stA.add(this);
+		while (!stA.isEmpty()) {
+
+			BinaryNode<T> node = (BinaryNode<T>) stA.remove();
+			lA.add(node);
+			if (node.left != null) {
+				stB.add(node.left);
+			}
+			if (node.right != null) {
+				stB.add(node.right);
+			}
+			if (stA.isEmpty()) {
+				stA = stB;
+				stB = new LinkedList<BinaryNode<T>>();
+				llBN.add(lA);
+				lA = new ArrayList<BinaryNode<T>>();
+			}
+		}
+		return llBN;
 	}
 
 }
