@@ -7,8 +7,9 @@ import java.util.Queue;
 import java.util.Stack;
 
 public class BinaryNode<T> {
-	public BinaryNode<T> right;
-	public BinaryNode<T> left;
+	private BinaryNode<T> parent;
+	private BinaryNode<T> right;
+	private BinaryNode<T> left;
 	public T data;
 
 	public BinaryNode() {
@@ -186,4 +187,29 @@ public class BinaryNode<T> {
 		return llBN;
 	}
 
+	public BinaryNode<T> getParent() {
+		return parent;
+	}
+
+	public void setParent(BinaryNode<T> node) {
+		this.parent = node;
+	}
+
+	public BinaryNode<T> getLeft() {
+		return left;
+	}
+
+	public void setLeft(BinaryNode<T> node) {
+		node.parent = this;
+		this.left = node;
+	}
+
+	public BinaryNode<T> getRight() {
+		return right;
+	}
+
+	public void setRight(BinaryNode<T> node) {
+		node.parent = this;
+		this.right = node;
+	}
 }

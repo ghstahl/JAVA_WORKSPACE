@@ -26,10 +26,10 @@ public class BinaryNodeTest {
 		List<BinaryNode<Integer>> listWorkingNode = new ArrayList<BinaryNode<Integer>>();
 		for (int i = 1; i < depth; ++i) {
 			for (int j = 0; j < listNode.size(); ++j) {
-				listNode.get(j).left = new BinaryNode<Integer>(data = nextValue(data, doRandomData));
-				listNode.get(j).right = new BinaryNode<Integer>(data = nextValue(data, doRandomData));
-				listWorkingNode.add(listNode.get(j).left);
-				listWorkingNode.add(listNode.get(j).right);
+				listNode.get(j).setLeft(new BinaryNode<Integer>(data = nextValue(data, doRandomData)));
+				listNode.get(j).setRight(new BinaryNode<Integer>(data = nextValue(data, doRandomData)));
+				listWorkingNode.add(listNode.get(j).getLeft());
+				listWorkingNode.add(listNode.get(j).getRight());
 			}
 			listNode = listWorkingNode;
 			listWorkingNode = new ArrayList<BinaryNode<Integer>>();
@@ -43,14 +43,14 @@ public class BinaryNodeTest {
 		BinaryNode<Integer> currentNode = rootNode;
 		// go down left
 		for (Integer i = 0; i < 5; ++i) {
-			currentNode.left = new BinaryNode<>(i);
-			currentNode = currentNode.left;
+			currentNode.setLeft(new BinaryNode<>(i));
+			currentNode = currentNode.getLeft();
 		}
 		// go down right
 		currentNode = rootNode;
 		for (Integer i = 0; i < 7; ++i) {
-			currentNode.right = new BinaryNode<>(i);
-			currentNode = currentNode.right;
+			currentNode.setRight(new BinaryNode<>(i));
+			currentNode = currentNode.getRight();
 		}
 
 		// not balanced
@@ -64,14 +64,14 @@ public class BinaryNodeTest {
 		BinaryNode<Integer> currentNode = rootNode;
 		// go down left
 		for (Integer i = 0; i < 6; ++i) {
-			currentNode.left = new BinaryNode<>(i);
-			currentNode = currentNode.left;
+			currentNode.setLeft(new BinaryNode<>(i));
+			currentNode = currentNode.getLeft();
 		}
 		// go down right
 		currentNode = rootNode;
 		for (Integer i = 0; i < 7; ++i) {
-			currentNode.right = new BinaryNode<>(i);
-			currentNode = currentNode.right;
+			currentNode.setRight(new BinaryNode<>(i));
+			currentNode = currentNode.getRight();
 		}
 
 		// not balanced
