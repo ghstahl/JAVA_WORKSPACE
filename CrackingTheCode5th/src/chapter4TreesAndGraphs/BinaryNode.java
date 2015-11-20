@@ -42,6 +42,44 @@ public class BinaryNode<T> extends EventRegistration<BinaryNode<T>> {
 		isStopTraversal = true;
 	}
 
+	// 4.7 Design an algorithm and write code to find the first common ancestor
+	// of two nodes in a binary tree. Avoid storing additional nodes in a data
+	// structure. NOTE: This is not necessarily a binary search tree.
+	public BinaryNode<T> FindCommonAncestor(BinaryNode<T> nodeOne, BinaryNode<T> nodeTwo) {
+		BinaryNode.setVisitedMarker(Utils.randInt(0, 1000000));
+		BinaryNode<T> current = nodeOne;
+		while (current != null) {
+			current.setVisited();
+			current = current.getParent();
+		}
+		BinaryNode<T> rootNode = null;
+		current = nodeTwo;
+		while (current != null) {
+			current.setVisited();
+			rootNode = current;
+			current = current.getParent();
+		}
+
+		do {
+			boolean diverge = rootNode.getLeft().isVisited() && rootNode.getRight().isVisited();
+			if (diverge) {
+				break;
+			}
+			if (rootNode.getLeft().isVisited()) {
+				rootNode = rootNode.getLeft();
+			} else {
+				rootNode = rootNode.getRight();
+			}
+		} while (true);
+
+		return rootNode;
+
+	}
+
+	// 4.6 Write an algorithm to find the'next'node (i.e., in-order successor)
+	// of a given node in a binary search tree. You may assume that each node
+	// has a link to its parent.
+
 	// Left,Root,Right
 	//
 	public void DoInOrderRootDownTraversal() {
@@ -68,9 +106,6 @@ public class BinaryNode<T> extends EventRegistration<BinaryNode<T>> {
 
 	}
 
-	// 4.6 Write an algorithm to find the'next'node (i.e., in-order successor)
-	// of a given node in a binary search tree. You may assume that each node
-	// has a link to its parent.
 	public void RecursiveInOrderRootDownTraversal(BinaryNode<T> node,
 			IEventRegistration<BinaryNode<T>> eventRegistration) {
 		if (node == null || isStopTraversal) {

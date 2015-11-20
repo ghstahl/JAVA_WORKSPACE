@@ -212,4 +212,46 @@ public class BinaryNodeTest {
 		es.node.DoInOrderRootUpDownTraversal();
 		assertTrue(es2.node.data == 7);
 	}
+
+	// 4.7 Design an algorithm and write code to find the first common ancestor
+	// of two nodes in a binary tree. Avoid storing additional nodes in a data
+	// structure. NOTE: This is not necessarily a binary search tree.
+	@Test
+	public void test_Make_Balanced_Tree_and_Find_Next_First_Common_Ancestor_RootNode() {
+		int depth = 5;
+		BinaryNode<Integer> rootNode = makeLargeBalancedTree(depth, false);
+		BinaryNode<Integer> nodeOne, nodeTwo, commonNode;
+		nodeOne = rootNode;
+		nodeTwo = rootNode;
+		while (nodeOne.getLeft() != null) {
+			nodeOne = nodeOne.getLeft();
+		}
+		while (nodeTwo.getRight() != null) {
+			nodeTwo = nodeTwo.getRight();
+		}
+		commonNode = rootNode.FindCommonAncestor(nodeOne, nodeTwo);
+
+		assertEquals(rootNode.data, commonNode.data);
+	}
+
+	// 4.7 Design an algorithm and write code to find the first common ancestor
+	// of two nodes in a binary tree. Avoid storing additional nodes in a data
+	// structure. NOTE: This is not necessarily a binary search tree.
+	@Test
+	public void test_Make_Balanced_Tree_and_Find_Next_First_Common_Ancestor_DeepNode() {
+		int depth = 5;
+		BinaryNode<Integer> rootNode = makeLargeBalancedTree(depth, false);
+		BinaryNode<Integer> nodeOne, nodeTwo, commonNode, actualNode;
+		nodeOne = rootNode;
+		nodeTwo = rootNode;
+		while (nodeOne.getLeft() != null) {
+			nodeOne = nodeOne.getLeft();
+		}
+		nodeTwo = nodeOne.getParent().getRight();
+		actualNode = nodeOne.getParent();
+
+		commonNode = rootNode.FindCommonAncestor(nodeOne, nodeTwo);
+
+		assertEquals(actualNode.data, commonNode.data);
+	}
 }
