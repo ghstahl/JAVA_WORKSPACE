@@ -157,11 +157,78 @@ public class BinaryNode<T> extends EventRegistration<BinaryNode<T>> {
 	// purposes of this question, a balanced tree is defined to be a tree such
 	// that the heights of the two subtrees of any node never differ by more
 	// than one.
+
+	// O(N^2), for every node we do a get height recursive down.
+	public boolean isBalanced_Recursive2() {
+		int lHeight = getHeight2(this.getLeft());
+		if (lHeight == -1)
+			return false;
+		int rHeight = getHeight2(this.getLeft());
+		if (rHeight == -1)
+			return false;
+		int diff = Math.abs(lHeight - rHeight);
+		if (diff > 1)
+			return false;
+		return true;
+	}
+
+	private int getHeight2(BinaryNode<T> node) {
+		if (node == null)
+			return 0;
+		int lHeight = getHeight(node.getLeft());
+		if (lHeight == -1)
+			return -1;
+		int rHeight = getHeight(node.getRight());
+		if (rHeight == -1)
+			return -1;
+		int diff = Math.abs(lHeight - rHeight);
+		if (diff > 1)
+			return -1;
+
+		int height = 1 + lHeight + rHeight;
+		return height;
+	}
+
+	// 4.1 Implement a function to check if a binary tree is balanced. For the
+	// purposes of this question, a balanced tree is defined to be a tree such
+	// that the heights of the two subtrees of any node never differ by more
+	// than one.
+
+	// O(N^2), for every node we do a get height recursive down.
+	public boolean isBalanced_Recursive1() {
+		int lHeight = getHeight(this.getLeft());
+		int rHeight = getHeight(this.getLeft());
+		int diff = Math.abs(lHeight - rHeight);
+		if (diff > 1)
+			return false;
+
+		boolean balanced = false;
+		if (this.getLeft() != null)
+			balanced = this.getLeft().isBalanced_Recursive1();
+		if (!balanced)
+			return balanced;
+		if (this.getRight() != null)
+			balanced = this.getRight().isBalanced_Recursive1();
+		return balanced;
+	}
+
+	private int getHeight(BinaryNode<T> node) {
+		if (node == null)
+			return 0;
+		int height = 1 + getHeight(node.getLeft()) + getHeight(node.getRight());
+		return height;
+	}
+
+	// 4.1 Implement a function to check if a binary tree is balanced. For the
+	// purposes of this question, a balanced tree is defined to be a tree such
+	// that the heights of the two subtrees of any node never differ by more
+	// than one.
 	// imagine the tree is submerged and we pull it out of the water. We
 	// remember the first one out and if any branch remains in the water after 2
 	// iterations than it is not balanced.
 	// Breadth Traversal where the breadth grows and if it shrinks we go one
 	// more level down to see if it dead ends.
+	// O(N)every node gets visited just once.
 	public boolean isBalanced_waterLevelMethod() {
 		int shortestDepth = -1;
 		int currentDepth = 0;

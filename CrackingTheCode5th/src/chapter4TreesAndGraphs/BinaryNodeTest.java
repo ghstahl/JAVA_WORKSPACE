@@ -37,6 +37,10 @@ public class BinaryNodeTest {
 		return rootNode;
 	}
 
+	// 4.1 Implement a function to check if a binary tree is balanced. For the
+	// purposes of this question, a balanced tree is defined to be a tree such
+	// that the heights of the two subtrees of any node never differ by more
+	// than one.
 	@Test
 	public void testIsBalanced_Not() {
 		BinaryNode<Integer> rootNode = new BinaryNode<>();
@@ -56,6 +60,11 @@ public class BinaryNodeTest {
 		// not balanced
 		boolean balanced = rootNode.isBalanced_waterLevelMethod();
 		assertFalse(balanced);
+		balanced = rootNode.isBalanced_Recursive1();
+		assertFalse(balanced);
+		balanced = rootNode.isBalanced_Recursive2();
+		assertFalse(balanced);
+
 	}
 
 	@Test
@@ -77,6 +86,10 @@ public class BinaryNodeTest {
 		// not balanced
 		boolean balanced = rootNode.isBalanced_waterLevelMethod();
 		assertTrue(balanced);
+		balanced = rootNode.isBalanced_Recursive1();
+		assertFalse(balanced);
+		balanced = rootNode.isBalanced_Recursive2();
+		assertFalse(balanced);
 	}
 
 	@Test
