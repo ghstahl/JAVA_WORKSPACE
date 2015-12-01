@@ -37,6 +37,75 @@ public class BinaryNodeTest {
 		return rootNode;
 	}
 
+	@Test
+	public void testLevelOrderTraversal() {
+		class EventSubscriber implements ISubscriber<BinaryNode<Integer>> {
+			public BinaryNode<Integer> node;
+			public String data = "";
+
+			@Override
+			public void onEvent(BinaryNode<Integer> object) {
+				// TODO Auto-generated method stub
+				node = object;
+				data += object.data;
+			}
+		}
+
+		int depth = 3;
+		EventSubscriber es = new EventSubscriber();
+		BinaryNode<Integer> rootNode = makeLargeBalancedTree(depth, false);
+		rootNode.RegisterSubscriber(es);
+		rootNode.DoLevelOrderTraversal();
+		assertEquals(es.data, "0123456");
+
+	}
+
+	@Test
+	public void testPreOrderTraversal() {
+		class EventSubscriber implements ISubscriber<BinaryNode<Integer>> {
+			public BinaryNode<Integer> node;
+			public String data = "";
+
+			@Override
+			public void onEvent(BinaryNode<Integer> object) {
+				// TODO Auto-generated method stub
+				node = object;
+				data += object.data;
+			}
+		}
+
+		int depth = 3;
+		EventSubscriber es = new EventSubscriber();
+		BinaryNode<Integer> rootNode = makeLargeBalancedTree(depth, false);
+		rootNode.RegisterSubscriber(es);
+		rootNode.DoPreOrderRootDownTraversal();
+		assertEquals(es.data, "0134256");
+
+	}
+
+	@Test
+	public void testInOrderTraversal() {
+		class EventSubscriber implements ISubscriber<BinaryNode<Integer>> {
+			public BinaryNode<Integer> node;
+			public String data = "";
+
+			@Override
+			public void onEvent(BinaryNode<Integer> object) {
+				// TODO Auto-generated method stub
+				node = object;
+				data += object.data;
+			}
+		}
+
+		int depth = 3;
+		EventSubscriber es = new EventSubscriber();
+		BinaryNode<Integer> rootNode = makeLargeBalancedTree(depth, false);
+		rootNode.RegisterSubscriber(es);
+		rootNode.DoInOrderRootDownTraversal();
+		assertEquals(es.data, "3140526");
+
+	}
+
 	// 4.1 Implement a function to check if a binary tree is balanced. For the
 	// purposes of this question, a balanced tree is defined to be a tree such
 	// that the heights of the two subtrees of any node never differ by more

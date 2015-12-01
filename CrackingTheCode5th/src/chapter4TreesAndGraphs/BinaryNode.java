@@ -76,6 +76,35 @@ public class BinaryNode<T> extends EventRegistration<BinaryNode<T>> {
 
 	}
 
+	// Level-Order
+	//
+	public void DoLevelOrderTraversal() {
+		BinaryNode.setVisitedMarker(Utils.randInt(0, 1000000));
+		isStopTraversal = false;
+		Queue<BinaryNode<T>> queue = new LinkedList<BinaryNode<T>>();
+		queue.add(this);
+		while (!queue.isEmpty()) {
+			BinaryNode<T> node = queue.remove();
+			// Root
+			this.FireEvent(node);
+			node.setVisited();
+			if (node.left != null) {
+				queue.add(node.left);
+			}
+			if (node.right != null) {
+				queue.add(node.right);
+			}
+		}
+	}
+
+	// Root,Left,Right
+	//
+	public void DoPreOrderRootDownTraversal() {
+		BinaryNode.setVisitedMarker(Utils.randInt(0, 1000000));
+		isStopTraversal = false;
+		RecursivePreOrderRootDownTraversal(this, this);
+	}
+
 	// 4.6 Write an algorithm to find the'next'node (i.e., in-order successor)
 	// of a given node in a binary search tree. You may assume that each node
 	// has a link to its parent.
@@ -104,6 +133,28 @@ public class BinaryNode<T> extends EventRegistration<BinaryNode<T>> {
 		RecursiveInOrderRootDownTraversal(node, eventRegistration);
 		RecursiveInOrderUpDownTraversal(node.getParent(), eventRegistration);
 
+	}
+
+	public void RecursivePreOrderRootDownTraversal(BinaryNode<T> node,
+			IEventRegistration<BinaryNode<T>> eventRegistration) {
+		if (node == null || isStopTraversal) {
+			return;
+		}
+		if (node.isVisited()) {
+			return;
+		}
+		// Root
+		eventRegistration.FireEvent(node);
+		node.setVisited();
+
+		// Left
+		RecursivePreOrderRootDownTraversal(node.getLeft(), eventRegistration);
+		if (isStopTraversal) {
+			return;
+		}
+
+		// Right
+		RecursivePreOrderRootDownTraversal(node.getRight(), eventRegistration);
 	}
 
 	public void RecursiveInOrderRootDownTraversal(BinaryNode<T> node,
